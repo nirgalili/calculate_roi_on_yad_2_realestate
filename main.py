@@ -4,6 +4,7 @@ import ctypes
 import pandas as pd
 import time
 import statistics
+import pymsgbox
 
 
 def create_number_from_price_str(price_str: str) -> int:
@@ -32,9 +33,9 @@ def calculate_selenium_price_list_mean(webdriver_list) -> int:
 
 driver = webdriver.Firefox()
 
-url = "https://www.yad2.co.il/realestate/forsale?topArea=101&area=15&city=6500&neighborhood=666&propertyGroup=apartments&property=1&rooms=4-4&floor=1-2"
+# url = "https://www.yad2.co.il/realestate/forsale?topArea=101&area=15&city=6500&neighborhood=666&propertyGroup=apartments&property=1&rooms=4-4&floor=1-2"
 
-# url = "https://www.yad2.co.il/realestate/forsale"
+url = "https://www.yad2.co.il/realestate/forsale"
 
 driver.get(url)
 
@@ -48,10 +49,9 @@ new_url = driver.current_url
 print(type(new_url))
 
 assets_prices = driver.find_elements(By.CSS_SELECTOR, "div.feeditem div.left_col .price")
-print(assets_prices[0].text)
+# print(assets_prices[0].text)
 
 assets_mean_price = calculate_selenium_price_list_mean(assets_prices)
-
 
 
 new_url_for_rent = new_url.replace("forsale", "rent")
@@ -59,16 +59,27 @@ new_url_for_rent = new_url.replace("forsale", "rent")
 driver.get(new_url_for_rent)
 
 rent_prices = driver.find_elements(By.CSS_SELECTOR, "div.feeditem div.left_col .price")
-
-rent_price = rent_prices[0].text
-print(rent_price)
+search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
+search_description_text = search_description.text
+print(search_description_text)
+# print(rent_price)
 
 rent_mean_price = calculate_selenium_price_list_mean(rent_prices)
 calculate_roi = round(rent_mean_price*11/assets_mean_price*100, 2)
 
 
-print("mean asset price:", assets_mean_price, "₪")
-print("mean rent price:", rent_mean_price, "₪")
+
+print("mean asset price:", "{:,}".format(assets_mean_price), "₪")
+print("mean rent price:", "{:,}".format(rent_mean_price), "₪")
 print(f"The ROI for the assets is: {calculate_roi}%")
 
+dict_to_add = {
+    "description in hebrew": search_description_text,
+    "assets mean price": "{:,}".format(assets_mean_price),
+    "rent mean price": "{:,}".format(rent_mean_price),
+    "ROI": str(calculate_roi)+"%"
+}
 
+print(dict_to_add)
+
+# returnValue = pymsgbox.prompt("תיאור מילולי של החיפוש שבוצע: עיר, שכונה, חדרים, קומה וכו'", 'הכנסת ערך')
