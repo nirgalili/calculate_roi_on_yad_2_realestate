@@ -5,7 +5,7 @@ import pandas as pd
 import time
 import statistics
 import pymsgbox
-
+import os.path
 
 def create_number_from_price_str(price_str: str) -> int:
     try:
@@ -32,9 +32,9 @@ def calculate_selenium_price_list_mean(webdriver_list) -> int:
 
 
 driver = webdriver.Firefox()
-
+# tests
 # url = "https://www.yad2.co.il/realestate/forsale?topArea=101&area=15&city=6500&neighborhood=666&propertyGroup=apartments&property=1&rooms=4-4&floor=1-2"
-
+# correct
 url = "https://www.yad2.co.il/realestate/forsale"
 
 driver.get(url)
@@ -73,6 +73,17 @@ print("mean asset price:", "{:,}".format(assets_mean_price), "₪")
 print("mean rent price:", "{:,}".format(rent_mean_price), "₪")
 print(f"The ROI for the assets is: {calculate_roi}%")
 
+# dict_of_title = {
+#     "description in hebrew": ["description in hebrew"],
+#     "assets mean price": ["assets mean price"],
+#     "rent mean price": ["rent mean price"],
+#     "ROI": ["ROI"]
+# }
+#
+# df = pd.DataFrame.from_dict(dict_of_title)
+#
+# df.to_csv('my_csv.csv', encoding="utf-8-sig", index=False)
+
 dict_to_add = {
     "description in hebrew": [search_description_text],
     "assets mean price": ["{:,}".format(assets_mean_price)],
@@ -84,4 +95,9 @@ print(dict_to_add)
 
 df = pd.DataFrame.from_dict(dict_to_add)
 
-df.to_csv('my_csv.csv', mode='a', header=False, encoding="utf-8-sig")
+file_exists = os.path.isfile("my_csv.csv")
+
+if file_exists:
+    df.to_csv('my_csv.csv', mode='a', header=False, encoding="utf-8-sig", index=False)
+else:
+    df.to_csv('my_csv.csv', encoding="utf-8-sig", index=False)
