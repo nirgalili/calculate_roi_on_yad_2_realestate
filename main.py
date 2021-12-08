@@ -74,12 +74,14 @@ print("mean rent price:", "{:,}".format(rent_mean_price), "₪")
 print(f"The ROI for the assets is: {calculate_roi}%")
 
 dict_to_add = {
-    "description in hebrew": search_description_text,
-    "assets mean price": "{:,}".format(assets_mean_price),
-    "rent mean price": "{:,}".format(rent_mean_price),
-    "ROI": str(calculate_roi)+"%"
+    "description in hebrew": [search_description_text],
+    "assets mean price": ["{:,}".format(assets_mean_price)],
+    "rent mean price": ["{:,}".format(rent_mean_price)],
+    "ROI": [str(calculate_roi)+"%"]
 }
 
 print(dict_to_add)
 
-# returnValue = pymsgbox.prompt("תיאור מילולי של החיפוש שבוצע: עיר, שכונה, חדרים, קומה וכו'", 'הכנסת ערך')
+df = pd.DataFrame.from_dict(dict_to_add)
+
+df.to_csv('my_csv.csv', mode='a', header=False, encoding="utf-8-sig")
