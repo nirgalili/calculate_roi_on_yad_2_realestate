@@ -40,13 +40,14 @@ url = "https://www.yad2.co.il/realestate/forsale"
 driver.get(url)
 
 text = 'Press OK after narrowing down search results.' \
-       'Try to narrow to a very specific asset type to improve ROI accuracy'
+       'Try to narrow to a very specific asset type to improve ROI accuracy' \
+       'press OK when you in list view and not map view!'
 title = 'Pop Up'
 
 answer = ctypes.windll.user32.MessageBoxExW(0, text, title, 0x40000)
 
 new_url = driver.current_url
-print(type(new_url))
+# print(type(new_url))
 
 assets_prices = driver.find_elements(By.CSS_SELECTOR, "div.feeditem div.left_col .price")
 # print(assets_prices[0].text)
@@ -61,6 +62,7 @@ driver.get(new_url_for_rent)
 rent_prices = driver.find_elements(By.CSS_SELECTOR, "div.feeditem div.left_col .price")
 search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
 search_description_text = search_description.text
+search_description_text = search_description_text.replace("להשכרה", "").replace("  ", " ")
 print(search_description_text)
 # print(rent_price)
 
@@ -91,7 +93,7 @@ dict_to_add = {
     "ROI": [str(calculate_roi)+"%"]
 }
 
-print(dict_to_add)
+# print(dict_to_add)
 
 df = pd.DataFrame.from_dict(dict_to_add)
 
@@ -101,3 +103,5 @@ if file_exists:
     df.to_csv('my_csv.csv', mode='a', header=False, encoding="utf-8-sig", index=False)
 else:
     df.to_csv('my_csv.csv', encoding="utf-8-sig", index=False)
+
+driver.close()
