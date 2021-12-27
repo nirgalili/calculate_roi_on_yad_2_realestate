@@ -76,16 +76,6 @@ print("mean asset price:", "{:,}".format(assets_mean_price), "₪")
 print("mean rent price:", "{:,}".format(rent_mean_price), "₪")
 print(f"The ROI for the assets is: {calculate_roi}%")
 
-# dict_of_title = {
-#     "description in hebrew": ["description in hebrew"],
-#     "assets mean price": ["assets mean price"],
-#     "rent mean price": ["rent mean price"],
-#     "ROI": ["ROI"]
-# }
-#
-# df = pd.DataFrame.from_dict(dict_of_title)
-#
-# df.to_csv('my_csv.csv', encoding="utf-8-sig", index=False)
 
 dict_to_add = {
     "description in hebrew": [search_description_text],
@@ -93,8 +83,6 @@ dict_to_add = {
     "rent mean price": ["{:,}".format(rent_mean_price)],
     "ROI": [str(calculate_roi)+"%"]
 }
-
-# print(dict_to_add)
 
 df = pd.DataFrame.from_dict(dict_to_add)
 
