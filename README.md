@@ -5,7 +5,7 @@ The program ask the user for inputs from the console so make sure it's visible a
 <br />
 This program will ask you to determine if you work with fast or slow internet.
 <br />
-In case you are working with replit choose slow - 'n'.
+In case you are working with replit choose slow - 'y'.
 <br />
 For fast internet the program will lunch a Chrome tab for you and for slow internet you will open one with a link.
 <br />
