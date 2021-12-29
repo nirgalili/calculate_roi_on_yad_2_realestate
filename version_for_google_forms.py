@@ -1,13 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import pandas as pd
 import time
 import statistics
-import os.path
 
 url_yad_2_sale = "https://www.yad2.co.il/realestate/forsale"
 url_google_forms = "https://docs.google.com/forms/d/e/1FAIpQLSfBB9nKjz3wSzWMjQWSZPgIRxgpNpj7CCRaalom97SVYOFPew/viewform?usp=sf_link"
+
+clearConsole = lambda: print('\n' * 150)
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -28,16 +28,14 @@ while not valid_email:
     user_email = input(text)
     valid_email = enter_email(user_email)
 
+clearConsole()
 
-
-print("")
 slow_network = input("Is the internet slow?\n"
                      "press 'y' if the network slow or "
                      "'n' if network fast: ").lower()
 
-# driver.get(url)
-# time.sleep(5)
-print("")
+clearConsole()
+
 if slow_network == 'y':
     url_yad_2_sale = input(f"Go to yad2 site to this link:\n"
                 "\n"
@@ -48,6 +46,8 @@ if slow_network == 'y':
                 "Paste here the site link after narrowing\n"
                 "only when site is in list view and not map view!\n"
                 "Type here new url and press Enter:\n")
+    clearConsole()
+    print("Loading, please wait")
     driver.get(url_yad_2_sale)
 else:
     driver.get(url_yad_2_sale)
@@ -56,11 +56,16 @@ else:
            'Press enter only when the yad2 site is in list view and not map view!\n' \
            'Enter "ok" here: '
 
-print("")
+clearConsole()
+print("Loading, please wait")
+
+clearConsole()
 input("Press Enter to continue after site lunches.\n"
       "Solve human test if one appears.")
 narrow_down_url = driver.current_url
 
+clearConsole()
+print("Loading, please wait")
 
 def get_selenium_list_prices(css_selector: list):
     return driver.find_elements(By.CSS_SELECTOR, css_selector)
@@ -106,9 +111,14 @@ number_of_assets_for_sale = len(convert_lists_of_webriver_to_text(assets_seleniu
 new_url_for_rent = narrow_down_url.replace("forsale", "rent")
 driver.get(new_url_for_rent)
 
-print("")
+clearConsole()
+print("Loading, please wait")
+
+clearConsole()
 input("Press Enter to continue after site lunches.\n"
       "Solve human test if one appears.")
+
+clearConsole()
 
 rent_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
 search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
@@ -124,7 +134,9 @@ rent_median_price = calculate_selenium_price_list_median(rent_selenium_prices)
 number_of_assets_for_rent = len(convert_lists_of_webriver_to_text(rent_selenium_prices))
 
 calculate_roi = round(rent_mean_price*11/assets_mean_price*100, 2)
-print("")
+
+
+
 print("-----Assets for sale info-----")
 print("Mean asset price:", "{:,}".format(assets_mean_price), "₪")
 print("Median asset price:", "{:,}".format(assets_median_price), "₪")
@@ -163,21 +175,5 @@ for field in list_of_columns_order_in_form_field:
 
 submit_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
 submit_button.click()
-
-# dict_to_add = {
-#     "description in hebrew": [search_description_text],
-#     "assets mean price": ["{:,}".format(assets_mean_price)],
-#     "rent mean price": ["{:,}".format(rent_mean_price)],
-#     "ROI": [str(calculate_roi)+"%"]
-# }
-#
-# df = pd.DataFrame.from_dict(dict_to_add)
-#
-# file_exists = os.path.isfile("my_csv.csv")
-#
-# if file_exists:
-#     df.to_csv('my_csv.csv', mode='a', header=False, encoding="utf-8-sig", index=False)
-# else:
-#     df.to_csv('my_csv.csv', encoding="utf-8-sig", index=False)
 
 driver.close()
