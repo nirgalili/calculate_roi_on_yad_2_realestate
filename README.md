@@ -27,3 +27,71 @@ The calculated ROI - return on investment calculate by dividing 11 mean rents by
 The results will be displayed on the console. 
 #####
 The results saved for sharing with the community without any personal info.
+
+
+# ROI calculation for real estate in Israel
+
+This software will find the Return On Investment (ROI) for real estate investment in Israel. 
+
+The user will adjust the search criteria using yad2 site for the preferable real 
+estate type for example: A 3 to 4 rooms appartment with balcony in Bat-Yam. 
+
+Once selected the Selenium webdriver will navigate throu the site, 
+find the relevant rental options in this area that will make profit from the selected real
+estate criteria. With this information the software will conduct calculation for the ROI.
+The result with the search criteria will be return to the user and a log will be saved
+in an open to view google sheet.
+
+
+
+## Installation
+
+To run this the user need to have an IDE such as PyCharm, 
+Google Crome and the path for chromedrive in the environment
+variables. explanation on that here: https://chromedriver.chromium.org/getting-started 
+
+## Run Locally
+
+Clone the project and follow the instraction on the run window in the IDE. A pop-up
+window of Chrome will open after starting the program. There you will narrow down the
+search criteria. 
+
+```bash
+  git clone https://link-to-project
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
+## Usage/Examples
+
+```javascript
+import Component from 'my-project'
+
+function App() {
+  return <Component />
+}
+```
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
