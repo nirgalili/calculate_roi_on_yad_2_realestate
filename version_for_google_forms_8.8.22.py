@@ -172,95 +172,96 @@ def secondary_screen():
             print("Please use only 'r' , 'l' or 'n', and try again.")
 
 
-driver = create_driver()
+if __name__ == "__main__":
 
-open_screen = secondary_screen()
-print(open_screen)
+    driver = create_driver()
 
-clear_console()
+    open_screen = secondary_screen()
+    print(open_screen)
 
-user_email = email_validation()
-
-clear_console()
-
-iterations = 0
-assets_mean_price = None
-while assets_mean_price is None and iterations < 2:
-    select_user_interface()
-    narrow_down_url_yad2 = get_current_url()
-    assets_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
-    assets_mean_price = calculate_selenium_price_list_mean(assets_selenium_prices)
-    iterations += 1
-
-if assets_mean_price is None:
     clear_console()
-    print("couldn't find results for the real estate query - program is terminate.")
-    exit(1)
 
-assets_median_price = calculate_selenium_price_list_median(assets_selenium_prices)
-number_of_assets_for_sale = len(convert_lists_of_webriver_to_text(assets_selenium_prices))
+    user_email = email_validation()
 
-new_url_for_rent = narrow_down_url_yad2.replace("forsale", "rent")
-driver.get(new_url_for_rent)
+    clear_console()
 
-loading_please_wait()
+    iterations = 0
+    assets_mean_price = None
+    while assets_mean_price is None and iterations < 2:
+        select_user_interface()
+        narrow_down_url_yad2 = get_current_url()
+        assets_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
+        assets_mean_price = calculate_selenium_price_list_mean(assets_selenium_prices)
+        iterations += 1
 
-solve_human_test()
+    if assets_mean_price is None:
+        clear_console()
+        print("couldn't find results for the real estate query - program is terminate.")
+        exit(1)
 
-clear_console()
+    assets_median_price = calculate_selenium_price_list_median(assets_selenium_prices)
+    number_of_assets_for_sale = len(convert_lists_of_webriver_to_text(assets_selenium_prices))
 
-rent_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
-search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
-search_description_text = search_description.text
-search_description_text = search_description_text.replace("להשכרה", "").replace("  ", " ")
-print("")
-print(search_description_text)
-print("other way to print hebrew if the former goes reverse")
-print(search_description_text[::-1])
+    new_url_for_rent = narrow_down_url_yad2.replace("forsale", "rent")
+    driver.get(new_url_for_rent)
 
-rent_mean_price = calculate_selenium_price_list_mean(rent_selenium_prices)
-rent_median_price = calculate_selenium_price_list_median(rent_selenium_prices)
-number_of_assets_for_rent = len(convert_lists_of_webriver_to_text(rent_selenium_prices))
+    loading_please_wait()
 
-calculate_roi = roi_calculation(rent_mean_price, assets_mean_price)
+    solve_human_test()
 
-print("-----Assets for sale info-----")
-print("Mean assets price:", "{:,}".format(assets_mean_price), "₪")
-print("Median assets price:", "{:,}".format(assets_median_price), "₪")
-print(f"Number of assets for sale is: {number_of_assets_for_sale}")
-print("")
-print("-----Assets for rent info-----")
-print("Mean rent price:", "{:,}".format(rent_mean_price), "₪")
-print("Median rent price:", "{:,}".format(rent_median_price), "₪")
-print(f"Number of assets for rent is: {number_of_assets_for_rent}")
-print("")
-print(f"The ROI for the assets is: {calculate_roi}%")
+    clear_console()
 
-driver.get(URL_GOOGLE_FORMS)
-time.sleep(2)
+    rent_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
+    search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
+    search_description_text = search_description.text
+    search_description_text = search_description_text.replace("להשכרה", "").replace("  ", " ")
+    print("")
+    print(search_description_text)
+    print("other way to print hebrew if the former goes reverse")
+    print(search_description_text[::-1])
 
-list_of_columns_order_in_form_field = [
-    [user_email, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [search_description_text,
-     '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [assets_mean_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [assets_median_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [number_of_assets_for_sale,
-     '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [rent_mean_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [rent_median_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [number_of_assets_for_rent,
-     '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div[1]/div/div[1]/input'],
-    [calculate_roi, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[9]/div/div/div[2]/div/div[1]/div/div[1]/input']
-]
+    rent_mean_price = calculate_selenium_price_list_mean(rent_selenium_prices)
+    rent_median_price = calculate_selenium_price_list_median(rent_selenium_prices)
+    number_of_assets_for_rent = len(convert_lists_of_webriver_to_text(rent_selenium_prices))
 
+    calculate_roi = roi_calculation(rent_mean_price, assets_mean_price)
 
-for field in list_of_columns_order_in_form_field:
-    enter_text_to_google_form(question_answer=field[0], css_selector=field[1])
+    print("-----Assets for sale info-----")
+    print("Mean assets price:", "{:,}".format(assets_mean_price), "₪")
+    print("Median assets price:", "{:,}".format(assets_median_price), "₪")
+    print(f"Number of assets for sale is: {number_of_assets_for_sale}")
+    print("")
+    print("-----Assets for rent info-----")
+    print("Mean rent price:", "{:,}".format(rent_mean_price), "₪")
+    print("Median rent price:", "{:,}".format(rent_median_price), "₪")
+    print(f"Number of assets for rent is: {number_of_assets_for_rent}")
+    print("")
+    print(f"The ROI for the assets is: {calculate_roi}%")
 
-submit_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
-submit_button.click()
+    driver.get(URL_GOOGLE_FORMS)
+    time.sleep(2)
 
-driver.close()
+    list_of_columns_order_in_form_field = [
+        [user_email, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [search_description_text,
+         '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [assets_mean_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [assets_median_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [number_of_assets_for_sale,
+         '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [rent_mean_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [rent_median_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [number_of_assets_for_rent,
+         '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [calculate_roi, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[9]/div/div/div[2]/div/div[1]/div/div[1]/input']
+    ]
+
+    for field in list_of_columns_order_in_form_field:
+        enter_text_to_google_form(question_answer=field[0], css_selector=field[1])
+
+    submit_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
+    submit_button.click()
+
+    driver.close()
 
 
