@@ -1,34 +1,3 @@
-# Yad2 data scrapping
-### This is a scrapping program for yad2 real estate website.
-######
-The program ask the user for inputs from the console so make sure it's visible all the time.
-<br />
-This program will ask you to determine if you work with fast or slow internet.
-<br />
-In case you are working with replit choose slow - 'y'.
-<br />
-For fast internet the program will lunch a Chrome tab for you and for slow internet you will open one with a link.
-<br />
-In the yad2 link that will open you need to narrow down search result to a specific are of interest and specific asset type such as:
-<br />
-Tel Aviv, Ramat Aviv Gimel, 4 rooms, asset type = Apartment
-<br />
-After narrowing down and while the browser is in list mode (not map) continue by following the console prompt.
-<br />
-#####
-With this program you can calculate the following:
-<br />
-Median and Mean price for Assets for sale and rentals for your search.
-<br />
-Number of assets for sale and rent.
-<br />
-The calculated ROI - return on investment calculate by dividing 11 mean rents by the mean asset price.
-#####
-The results will be displayed on the console. 
-#####
-The results saved for sharing with the community without any personal info.
-
-
 # ROI calculation for real estate in Israel
 
 This software will find the Return On Investment (ROI) for real estate investment in Israel. 
@@ -42,6 +11,11 @@ estate criteria. With this information the software will conduct calculation for
 The result with the search criteria will be return to the user and a log will be saved
 in an open to view google sheet.
 
+With this program you can calculate the following:
+Median and Mean price for Assets for sale and rentals for your search query.
+Number of assets for sale and rent.
+The calculated ROI - return on investment calculate by dividing 
+11 mean rent month by the mean asset price.
 
 
 ## Installation
@@ -54,44 +28,27 @@ variables. explanation on that here: https://chromedriver.chromium.org/getting-s
 
 Clone the project and follow the instraction on the run window in the IDE. A pop-up
 window of Chrome will open after starting the program. There you will narrow down the
-search criteria. 
+search criteria. Pay attention to the prompts given in the IDE run screen. This is the 
+program interface. 
 
-```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
+If chhose to run with Replit and not locally in IDE use this blogpost 
+in hebrew for further explanation about Replit
 
 
 ## Usage/Examples
 
-```javascript
-import Component from 'my-project'
 
-function App() {
-  return <Component />
-}
-```
+In order to deal with CAPTCHA  the webdriver will ask the user to solze
+the puzzels given by the yad2 site such as this one:
 
+![Alt text](https://nadlandata.files.wordpress.com/2022/01/chrome-capture-4.gif?w=555&zoom=2 "Optional title")
+
+The output from the calculation will be print with the calculated info for 
+the user search query:
+
+![Alt text](https://nadlandata.files.wordpress.com/2022/01/image-19.png "Optional title")
 
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
 

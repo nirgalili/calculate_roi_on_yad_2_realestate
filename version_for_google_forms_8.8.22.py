@@ -1,11 +1,8 @@
-
 # Imports
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import numpy as np
-import pandas as pd
 
 # Consts
 # all the utl for the project
@@ -18,13 +15,15 @@ URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/' \
 PRICE_CSS_SELECTOR = "div.feeditem div.left_col .price"
 
 # Functions
-clearConsole = lambda: print('\n' * 80) # fake clear screen func for convinience
+clear_console = lambda: print('\n' * 80) # fake clear screen func for convinience
 
 
 def create_driver():
     option = webdriver.ChromeOptions()
     option.add_argument('--no-sandbox')
     option.add_argument("--disable-dev-shm-usage")
+    option.add_argument("--window-size=800,200")
+    # option.add_argument("--secondary-display-layout")
     return webdriver.Chrome(options=option)
 
 
@@ -38,12 +37,12 @@ def enter_email(email: str) -> bool:
 
 
 def loading_please_wait():
-    clearConsole()
+    clear_console()
     print("Loading, please wait")
 
 
 def solve_human_test():
-    clearConsole()
+    clear_console()
     input("Press Enter to continue after site lunches.\n"
           "Solve human test if one appears and then press Enter.")
 
@@ -52,7 +51,7 @@ def get_selenium_list_prices(css_selector: str):
     return driver.find_elements(By.CSS_SELECTOR, css_selector)
 
 
-def create_number_from_price_str(price_str: str) -> int:
+def create_number_from_price_str(price_str: str):
     try:
         return int(price_str.replace(",", "").replace(" ₪", ""))
     except ValueError:
@@ -81,6 +80,7 @@ def calculate_selenium_price_list_mean(webdriver_list) -> int:
         mean_price = int(np.mean(price_list))
     except ValueError:
         mean_price = None
+        print("couldn't find results for the real estate query - please check your search query and retry.")
     return mean_price
 
 
@@ -94,11 +94,13 @@ def enter_text_to_google_form(question_answer, css_selector: str):
     form_field = driver.find_element(By.XPATH, css_selector)
     form_field.send_keys(question_answer)
 
+
 def get_current_url():
     loading_please_wait()
     narrow_down_url = driver.current_url
     loading_please_wait()
     return narrow_down_url
+
 
 def email_validation():
     valid_email = False
@@ -149,13 +151,37 @@ def select_user_interface():
         input(text)
 
 
+def secondary_screen():
+    while True:
+        secondary_screen_location = input("Do you have secondary screen?\n press 'n' if you don't or if work in replit\n " \
+                                          "press 'r' if it's to the right or 'l' if it's to the left: \n")
+        if secondary_screen_location == 'l':
+            driver.set_window_position(-1000, 0)
+            driver.maximize_window()
+            text = 'New chrome window opened on the left secondary screen'
+            return text
+        elif secondary_screen_location == 'r':
+            driver.set_window_position(1000, 0)
+            driver.maximize_window()
+            text = 'New chrome window opened on the right secondary screen'
+            return text
+        elif secondary_screen_location == 'n':
+            text = 'New chrome window opened. Arrange it so you can see both the chrome and the IDE run console'
+            return text
+        else:
+            print("Please use only 'r' , 'l' or 'n', and try again.")
 
 
 driver = create_driver()
 
+open_screen = secondary_screen()
+print(open_screen)
+
+clear_console()
+
 user_email = email_validation()
 
-clearConsole()
+clear_console()
 
 iterations = 0
 assets_mean_price = None
@@ -167,7 +193,8 @@ while assets_mean_price is None and iterations < 2:
     iterations += 1
 
 if assets_mean_price is None:
-    print("couldn't find results - please check your search query and retry.")
+    clear_console()
+    print("couldn't find results for the real estate query - program is terminate.")
     exit(1)
 
 assets_median_price = calculate_selenium_price_list_median(assets_selenium_prices)
@@ -180,7 +207,7 @@ loading_please_wait()
 
 solve_human_test()
 
-clearConsole()
+clear_console()
 
 rent_selenium_prices = get_selenium_list_prices(PRICE_CSS_SELECTOR)
 search_description = driver.find_element(By.CSS_SELECTOR, "div.feed_header_container div.feed_header h1")
