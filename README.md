@@ -37,16 +37,22 @@ in hebrew for further explanation about Replit
 
 ## Usage/Examples
 
+To operate this program you will have to respond to propts from the IDE run window and fill
+search query in the yad2 site. During work it shuld look something like this:
+
+![Alt text](Screenshot_1.jpg?raw=true "Optional Title")
 
 In order to deal with CAPTCHA  the webdriver will ask the user to solze
 the puzzels given by the yad2 site such as this one:
 
-![Alt text](https://nadlandata.files.wordpress.com/2022/01/chrome-capture-4.gif?w=555&zoom=2 "Optional title")
+![Alt text](Screenshot_3.jpg?raw=true "Optional Title")
 
 The output from the calculation will be print with the calculated info for 
 the user search query:
 
-![Alt text](https://nadlandata.files.wordpress.com/2022/01/image-19.png "Optional title")
+![Alt text](Screenshot_2.jpg?raw=true "Optional Title")
+
+
 
 ## License
 
