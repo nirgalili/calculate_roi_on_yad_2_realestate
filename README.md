@@ -31,7 +31,7 @@ window of Chrome will open after starting the program. There you will narrow dow
 search criteria. Pay attention to the prompts given in the IDE run screen. This is the 
 program interface. 
 
-If chhose to run with Replit and not locally in IDE use this blogpost 
+If chose to run with Replit and not locally in IDE use this blogpost 
 in hebrew for further explanation about Replit
 
 
