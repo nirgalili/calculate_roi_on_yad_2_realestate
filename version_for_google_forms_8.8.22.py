@@ -8,8 +8,10 @@ import numpy as np
 # all the utl for the project
 URL_YAD2_SALE = "https://www.yad2.co.il/realestate/forsale"
 
-URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/' \
-                   '1FAIpQLSfcejfEwZToX6Y8JtSLk9TCFDEz4kk1oIlDetPyT2Llxx35AQ/viewform?usp=sf_link'
+#URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/' \
+#                   '1FAIpQLSfcejfEwZToX6Y8JtSLk9TCFDEz4kk1oIlDetPyT2Llxx35AQ/viewform?usp=sf_link'
+
+URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/1FAIpQLSfcejfEwZToX6Y8JtSLk9TCFDEz4kk1oIlDetPyT2Llxx35AQ/viewform?usp=sf_link'
 
 
 PRICE_CSS_SELECTOR = "div.feeditem div.left_col .price"
@@ -242,7 +244,7 @@ if __name__ == "__main__":
     time.sleep(2)
 
     list_of_columns_order_in_form_field = [
-        [user_email, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input'],
+        [user_email, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div[1]/input'],
         [search_description_text,
          '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input'],
         [assets_mean_price, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input'],
@@ -255,6 +257,7 @@ if __name__ == "__main__":
          '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div[1]/div/div[1]/input'],
         [calculate_roi, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[9]/div/div/div[2]/div/div[1]/div/div[1]/input']
     ]
+
 
     for field in list_of_columns_order_in_form_field:
         enter_text_to_google_form(question_answer=field[0], css_selector=field[1])

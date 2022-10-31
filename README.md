@@ -21,24 +21,24 @@ The calculated ROI - return on investment calculate by dividing
 ## Installation
 
 To run this the user need to have an IDE such as PyCharm, 
-Google Crome and the path for chromedrive in the environment
+Google Chrome and the path for chromedrive in the environment
 variables. explanation on that here: https://chromedriver.chromium.org/getting-started 
 
 ## Run Locally
 
-Clone the project and follow the instraction on the run window in the IDE. A pop-up
+Clone the project and follow the instruction on the run window in the IDE. A pop-up
 window of Chrome will open after starting the program. There you will narrow down the
 search criteria. Pay attention to the prompts given in the IDE run screen. This is the 
 program interface. 
 
-If chhose to run with Replit and not locally in IDE use this blogpost 
+If chose to run with Replit and not locally in IDE use this blogpost 
 in hebrew for further explanation about Replit
 
 
 ## Usage/Examples
 
-To operate this program you will have to respond to propts from the IDE run window and fill
-search query in the yad2 site. During work it shuld look something like this:
+To operate this program you will have to respond to prompt from the IDE run window and fill
+search query in the yad2 site. During work, it should look something like this:
 
 ![alt text](figs/Screenshot_1.jpg)
 
