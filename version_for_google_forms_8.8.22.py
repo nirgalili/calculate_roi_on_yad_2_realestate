@@ -8,8 +8,6 @@ import numpy as np
 # all the utl for the project
 URL_YAD2_SALE = "https://www.yad2.co.il/realestate/forsale"
 
-#URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/' \
-#                   '1FAIpQLSfcejfEwZToX6Y8JtSLk9TCFDEz4kk1oIlDetPyT2Llxx35AQ/viewform?usp=sf_link'
 
 URL_GOOGLE_FORMS = 'https://docs.google.com/forms/d/e/1FAIpQLSfcejfEwZToX6Y8JtSLk9TCFDEz4kk1oIlDetPyT2Llxx35AQ/viewform?usp=sf_link'
 
