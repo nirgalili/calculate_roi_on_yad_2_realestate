@@ -10,6 +10,7 @@ find the relevant rental options in this area that will make profit from the sel
 estate criteria. With this information the software will conduct calculation for the ROI.
 The result with the search criteria will be return to the user and a log will be saved
 in an open to view google sheet.
+https://docs.google.com/spreadsheets/d/1krZQ0BJ4_qbmruwrECRq7HcLBug1tlzjG91AecPM5B4/edit?usp=sharing
 
 With this program you can calculate the following:
 Median and Mean price for Assets for sale and rentals for your search query.
